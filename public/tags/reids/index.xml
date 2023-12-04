@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reids on Fleeting Half Day</title>
-    <link>https://example.org/tags/reids/</link>
+    <link>https://fleeting-half-day.github.io/tags/reids/</link>
     <description>Recent content in Reids on Fleeting Half Day</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 31 Jul 2023 14:20:32 +0800</lastBuildDate>
-    <atom:link href="https://example.org/tags/reids/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://fleeting-half-day.github.io/tags/reids/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reids详解</title>
-      <link>https://example.org/2023/07/reids%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://fleeting-half-day.github.io/2023/07/reids%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Mon, 31 Jul 2023 14:20:32 +0800</pubDate>
-      <guid>https://example.org/2023/07/reids%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://fleeting-half-day.github.io/2023/07/reids%E8%AF%A6%E8%A7%A3/</guid>
       <description></description>
     </item>
   </channel>

@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java基础 on Fleeting Half Day</title>
-    <link>https://example.org/categories/java%E5%9F%BA%E7%A1%80/</link>
+    <link>https://fleeting-half-day.github.io/categories/java%E5%9F%BA%E7%A1%80/</link>
     <description>Recent content in Java基础 on Fleeting Half Day</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Jul 2023 15:41:32 +0800</lastBuildDate>
-    <atom:link href="https://example.org/categories/java%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://fleeting-half-day.github.io/categories/java%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>线程池</title>
-      <link>https://example.org/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
+      <link>https://fleeting-half-day.github.io/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
       <pubDate>Thu, 27 Jul 2023 15:41:32 +0800</pubDate>
-      <guid>https://example.org/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
+      <guid>https://fleeting-half-day.github.io/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
       <description></description>
     </item>
     <item>
       <title>JVM</title>
-      <link>https://example.org/2023/07/jvm/</link>
+      <link>https://fleeting-half-day.github.io/2023/07/jvm/</link>
       <pubDate>Wed, 19 Jul 2023 13:14:32 +0800</pubDate>
-      <guid>https://example.org/2023/07/jvm/</guid>
+      <guid>https://fleeting-half-day.github.io/2023/07/jvm/</guid>
       <description></description>
     </item>
     <item>
       <title>Java 内存模型（JMM）</title>
-      <link>https://example.org/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/</link>
+      <link>https://fleeting-half-day.github.io/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/</link>
       <pubDate>Wed, 19 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>https://example.org/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/</guid>
+      <guid>https://fleeting-half-day.github.io/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/</guid>
       <description></description>
     </item>
   </channel>

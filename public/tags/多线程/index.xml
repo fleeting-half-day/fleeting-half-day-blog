@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>多线程 on Fleeting Half Day</title>
-    <link>https://example.org/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+    <link>https://fleeting-half-day.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
     <description>Recent content in 多线程 on Fleeting Half Day</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Jul 2023 15:41:32 +0800</lastBuildDate>
-    <atom:link href="https://example.org/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://fleeting-half-day.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>线程池</title>
-      <link>https://example.org/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
+      <link>https://fleeting-half-day.github.io/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
       <pubDate>Thu, 27 Jul 2023 15:41:32 +0800</pubDate>
-      <guid>https://example.org/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
+      <guid>https://fleeting-half-day.github.io/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
       <description></description>
     </item>
   </channel>

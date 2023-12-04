@@ -2,168 +2,168 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://example.org/categories/</loc>
+    <loc>https://fleeting-half-day.github.io/categories/</loc>
     <lastmod>2023-07-31T14:20:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/</loc>
+    <loc>https://fleeting-half-day.github.io/</loc>
     <lastmod>2023-07-31T14:20:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/posts/</loc>
+    <loc>https://fleeting-half-day.github.io/posts/</loc>
     <lastmod>2023-07-31T14:20:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/reids/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/reids/</loc>
     <lastmod>2023-07-31T14:20:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/2023/07/reids%E8%AF%A6%E8%A7%A3/</loc>
+    <loc>https://fleeting-half-day.github.io/2023/07/reids%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2023-07-31T14:20:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/</loc>
     <lastmod>2023-07-31T14:20:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/%E5%88%86%E5%B8%83%E5%BC%8F/</loc>
+    <loc>https://fleeting-half-day.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/</loc>
     <lastmod>2023-07-31T14:20:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/java%E5%9F%BA%E7%A1%80/</loc>
+    <loc>https://fleeting-half-day.github.io/categories/java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2023-07-27T15:41:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
     <lastmod>2023-07-27T15:41:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</loc>
+    <loc>https://fleeting-half-day.github.io/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</loc>
     <lastmod>2023-07-27T15:41:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/jvm/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/jvm/</loc>
     <lastmod>2023-07-19T13:14:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/2023/07/jvm/</loc>
+    <loc>https://fleeting-half-day.github.io/2023/07/jvm/</loc>
     <lastmod>2023-07-19T13:14:32+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/</loc>
+    <loc>https://fleeting-half-day.github.io/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/</loc>
     <lastmod>2023-07-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</loc>
     <lastmod>2023-07-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</loc>
+    <loc>https://fleeting-half-day.github.io/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</loc>
     <lastmod>2023-07-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/disqus/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/disqus/</loc>
     <lastmod>2015-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/google-analytics/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/google-analytics/</loc>
     <lastmod>2015-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/gravatar/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/gravatar/</loc>
     <lastmod>2015-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/hexo-theme/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/hexo-theme/</loc>
     <lastmod>2015-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/releases/</loc>
+    <loc>https://fleeting-half-day.github.io/categories/releases/</loc>
     <lastmod>2015-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/responsive/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/responsive/</loc>
     <lastmod>2015-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/tranquilpeak/</loc>
+    <loc>https://fleeting-half-day.github.io/categories/tranquilpeak/</loc>
     <lastmod>2015-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2015/06/welcome-to-tranquilpeak-0.5.3-beta/</loc>
+    <loc>https://fleeting-half-day.github.io/2015/06/welcome-to-tranquilpeak-0.5.3-beta/</loc>
     <lastmod>2015-06-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/showcase/</loc>
+    <loc>https://fleeting-half-day.github.io/categories/showcase/</loc>
     <lastmod>2015-06-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2015/06/who-is-using-tranquilpeak-hugo-theme/</loc>
+    <loc>https://fleeting-half-day.github.io/2015/06/who-is-using-tranquilpeak-hugo-theme/</loc>
     <lastmod>2015-06-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2015/05/elements-showcase/</loc>
+    <loc>https://fleeting-half-day.github.io/2015/05/elements-showcase/</loc>
     <lastmod>2015-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/features/</loc>
+    <loc>https://fleeting-half-day.github.io/categories/features/</loc>
     <lastmod>2015-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/html-elements/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/html-elements/</loc>
     <lastmod>2015-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/markdown/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/markdown/</loc>
     <lastmod>2015-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/cover-image/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/cover-image/</loc>
     <lastmod>2015-05-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2015/05/cover-image-showcase/</loc>
+    <loc>https://fleeting-half-day.github.io/2015/05/cover-image-showcase/</loc>
     <lastmod>2015-05-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/github-theme/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/github-theme/</loc>
     <lastmod>2015-03-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/highlight-code/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/highlight-code/</loc>
     <lastmod>2015-03-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2015/03/highlighted-code-showcase/</loc>
+    <loc>https://fleeting-half-day.github.io/2015/03/highlighted-code-showcase/</loc>
     <lastmod>2015-03-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/test/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/test/</loc>
     <lastmod>2015-03-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/tag-plugins/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/tag-plugins/</loc>
     <lastmod>2014-10-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2014/10/tags-plugins-showcase/</loc>
+    <loc>https://fleeting-half-day.github.io/2014/10/tags-plugins-showcase/</loc>
     <lastmod>2014-10-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2014/08/hidden-social-section-showcase/</loc>
+    <loc>https://fleeting-half-day.github.io/2014/08/hidden-social-section-showcase/</loc>
     <lastmod>2014-08-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/social/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/social/</loc>
     <lastmod>2014-08-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2014/08/hidden-tag-section-showcase/</loc>
+    <loc>https://fleeting-half-day.github.io/2014/08/hidden-tag-section-showcase/</loc>
     <lastmod>2014-08-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/tags/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/tags/</loc>
     <lastmod>2014-08-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2014/08/hidden-pagination-showcase/</loc>
+    <loc>https://fleeting-half-day.github.io/2014/08/hidden-pagination-showcase/</loc>
     <lastmod>2014-08-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/pagination/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/pagination/</loc>
     <lastmod>2014-08-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/dailymotion/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/dailymotion/</loc>
     <lastmod>2014-08-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2014/08/video-integrations-showcase/</loc>
+    <loc>https://fleeting-half-day.github.io/2014/08/video-integrations-showcase/</loc>
     <lastmod>2014-08-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/videos-integration/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/videos-integration/</loc>
     <lastmod>2014-08-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/vimeo/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/vimeo/</loc>
     <lastmod>2014-08-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/youtube/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/youtube/</loc>
     <lastmod>2014-08-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/chinese/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/chinese/</loc>
     <lastmod>2013-10-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2013/10/chinese-test/</loc>
+    <loc>https://fleeting-half-day.github.io/2013/10/chinese-test/</loc>
     <lastmod>2013-10-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/image-gallery/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/image-gallery/</loc>
     <lastmod>2013-02-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2013/02/image-gallery-showcase/</loc>
+    <loc>https://fleeting-half-day.github.io/2013/02/image-gallery-showcase/</loc>
     <lastmod>2013-02-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/japanese/</loc>
+    <loc>https://fleeting-half-day.github.io/tags/japanese/</loc>
     <lastmod>2013-01-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/2013/01/japanese-test/</loc>
+    <loc>https://fleeting-half-day.github.io/2013/01/japanese-test/</loc>
     <lastmod>2013-01-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://example.org/archives/</loc>
+    <loc>https://fleeting-half-day.github.io/archives/</loc>
   </url>
 </urlset>
