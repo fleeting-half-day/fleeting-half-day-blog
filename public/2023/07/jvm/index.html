@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "JVM",
+  
+  "datePublished": "2023-07-19T13:14:32+08:00",
+  "dateModified": "2023-07-19T13:14:32+08:00",
+  "author": {
+    "@type": "Person",
+    "name": "Fleeting Half Day",
+    
+    "image": "https://example.org/images/avatar.png"
+    
+  },
+  "mainEntityOfPage": { 
+    "@type": "WebPage",
+    "@id": "https:\/\/example.org\/2023\/07\/jvm\/" 
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fleeting Half Day",
+    
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.org/images/avatar.png"
+    }
+    
+  },
+  "description": "",
+  "keywords": []
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.120.4 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="Fleeting Half Day">
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM">
+<meta name="twitter:title" content="JVM">
+<meta property="og:url" content="https://example.org/2023/07/jvm/">
+<meta property="twitter:url" content="https://example.org/2023/07/jvm/">
+<meta property="og:site_name" content="Fleeting Half Day">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2023-07-19T13:14:32">
+  
+  
+    <meta property="article:modified_time" content="2023-07-19T13:14:32">
+  
+  
+  
+    
+      <meta property="article:section" content="Java基础">
+    
+  
+  
+    
+      <meta property="article:tag" content="JVM">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://example.org/images/avatar.png">
+  <meta property="twitter:image" content="https://example.org/images/avatar.png">
+
+
+
+
+
+
+    <title>JVM</title>
+
+    <link rel="icon" href="https://example.org/images/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://example.org/2023/07/jvm/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://example.org/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://example.org/" aria-label="去首页">Fleeting Half Day</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://example.org/#about" aria-label="打开链接: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://example.org/images/avatar.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://example.org/#about" aria-label="阅读有关作者的更多信息">
+          <img class="sidebar-profile-picture" src="https://example.org/images/avatar.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Fleeting Half Day</h4>
+        
+          <h5 class="sidebar-profile-bio">我随便写写，你随意看看。</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/archives" title="Archives">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/#about" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/fleeting-half-day" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://example.org/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title">
+      JVM
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2023-07-19T13:14:32&#43;08:00">
+        
+  七月 19, 2023
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://example.org/categories/java%e5%9f%ba%e7%a1%80">Java基础</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <h3 id="运行时数据区">运行时数据区</h3>
+<ul>
+<li>程序计数器（线程私有）</li>
+<li>Java虚拟机栈（线程私有）</li>
+<li>本地方法栈（线程私有）</li>
+<li>Java堆（线程共享）</li>
+<li>方法区（线程共享）</li>
+</ul>
+<h3 id="垃圾收集">垃圾收集</h3>
+<h5 id="哪些对象已死">哪些对象已死？</h5>
+<ul>
+<li>引用计数算法</li>
+<li>可达性分析算法
+<ul>
+<li>GC roots
+<ul>
+<li>虚拟机栈中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中JNI引用的对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="引用">引用</h5>
+<ul>
+<li>强引用
+<ul>
+<li>强引用在，垃圾收集器永远不会回收被引用的对象。</li>
+</ul>
+</li>
+<li>软引用（SoftReference）
+<ul>
+<li>软引用关联的对象，系统将要发生内存溢出异常之前，将这些对象进行二次回收，如果还是没有足够的内存，才会抛出内存溢出异常。</li>
+</ul>
+</li>
+<li>弱引用（WeakReference）
+<ul>
+<li>弱引用关联的对象只能生存到下一次垃圾收集发生之前。垃圾收集器工作时，无论当前内存是否足够，都会回收掉弱引用的对象。</li>
+</ul>
+</li>
+<li>虚引用（PhantomReference）
+<ul>
+<li>虚引用不会对其关联对象的生存时间构成影响，也无法获取引用对象实例。唯一目的就是在对象被回收时收到一个系统通知。</li>
+</ul>
+</li>
+</ul>
+<h5 id="生存还是死亡">生存还是死亡</h5>
+<p>finalize()方法，没有必要执行finalize()方法的对象，会被放置在一个F-Queue的队列中，稍后有一个虚拟机自动创建、低优先级的Finalizer线程区执行。</p>
+<h5 id="垃圾收集算法">垃圾收集算法</h5>
+<ul>
+<li>标记-清除算法</li>
+<li>复制算法</li>
+<li>标记-整理算法</li>
+<li>分代收集算法</li>
+</ul>
+<h5 id="垃圾收集器">垃圾收集器</h5>
+<ul>
+<li>Serial收集器
+<ul>
+<li>新生代采用复制算法暂停所有用户线程，老年代采用标记-整理算法暂停所有用户线程。</li>
+</ul>
+</li>
+<li>ParNew收集器
+<ul>
+<li>Serial收集器的多线程版本。</li>
+</ul>
+</li>
+<li>Parallel Scavenge收集器
+<ul>
+<li>Parallel Scavenge收集器是一个新生代收集器，使用复制算法，是一个并行的多线程收集器，目标是打造一个可控制的吞吐量。所谓吞吐量就是CPU用于运行用户代码的时间与CPU总消耗的比值，即吞吐量 = 运行用户代码时间 / （运行用户代码时间 + 垃圾收集时间）。
+<ul>
+<li>最大垃圾收集停顿时间：-XX:MaxGCPauseMillis</li>
+<li>吞吐量大小：-XX:GCTimeRatio</li>
+<li>GC自适应调节策略开关：-XX:+UseAdaptiveSizePolicy</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Serial Old收集器
+<ul>
+<li>Serial Old是Serial收集器的老年代版本，是一个单线程收集器，使用“标记-整理”算法。</li>
+</ul>
+</li>
+<li>Parallel Old收集器
+<ul>
+<li>Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记-整理”算法。</li>
+</ul>
+</li>
+<li>CMS收集器
+<ul>
+<li>CMS收集器是基于“标记清除”算法实现的。是以获取最短回收停顿时间为目标的收集器。分为4个步骤：
+<ul>
+<li>初始标记：（暂停用户线程）标记GC Roots能直接关联到的对象。</li>
+<li>并发标记：进行GC Roots Tracing 的过程。</li>
+<li>重新标记：（暂停用户线程）修正并发标记期间用户程序继续运作而导致标记产生变动的一部分对象的标记记录，停顿一般比初始标记稍长，远比并发标记时间短。</li>
+<li>并发清除</li>
+</ul>
+</li>
+<li>整个过程中最耗时的并发标记和并发清除收集器线程都是和用户线程一起工作的。</li>
+<li>CMS并不完美，有3个明显缺点：
+<ul>
+<li><em>CMS收集器对CPU资源非常敏感</em>。在并发阶段，虽然不会导致用户线程停顿，但是因为会占用一部分线程而导致应用程序变慢，总吞吐量降低。CMS默认启动的回收线程数 = （CPU数量 + 3）/ 4。</li>
+<li><em>CMS收集器无法处理浮动垃圾，可能出现“Concurrent Mode Failure”失败而导致另一次Full GC的产生</em>。由于CMS并发清理阶段用户线程还在运行着，伴随程序运行自然就还会有新的垃圾不断产生，这部分垃圾出现在标记过程之后，CMS无法在当次收集中处理掉它们，只好留待下一次GC时再清理掉。这边垃圾就称为“浮动垃圾”。也是由于垃圾收集阶段用户线程还需要运行，那也就还需要预留有足够的内存空间给用户线程使用，因此CMS收集器不能像其他收集器那样等到老年代几乎完全被填满了再进行收集，需要预留一部分空间提供并发收集时程序运作使用。JDK1.5默认老年代使用68%的空间时就会激活，可以适当调高参数 <em>-XX:CMSInitiatingOccupancyFraction</em> 的值来提高触发百分比，JDK1.6中CMS收集器的启动阈值提升到了92%。如果CMS运行期间预留的内存无法满足程序需要，就会出现一次“Concurrent Mode Failure”失败，这时虚拟机将启动后备预案：临时启用Serial Old收集器重新进行老年代的垃圾收集，就会导致停顿时间很长。所以参数 <em>-XX:CMSInitiatingOccupancyFraction</em> 设置的太高很容易导致大量“Concurrent Mode Failure”失败，性能反而降低。</li>
+<li><em>CMS收集器是基于“标记-清除”算法实现的，就意味着收集结束后可能会产生大量的空间碎片</em>。空间碎片过多时，就会出现老年代还有很大空间，但是无法找到足够大的连续空间来分配大对象，不得不提前触发一次Full GC。
+<ul>
+<li><em>-XX:+UseCMSCompactAtFullCollection</em> 开关参数（默认开启），用于在CMS收集器要进行FullGC时开启内存碎片合并整理过程。</li>
+<li><em>-XX:CMSFullGCsBeforeCompation</em> 用于设置执行多少次不整理碎片的Full GC后，跟着来一次带整理的（默认值为0，表示每次进入Full GC时都进行碎片整理）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>G1收集器
+<ul>
+<li>G1是一款面向服务端应用的垃圾收集器。具备以下特点：
+<ul>
+<li>并发与并行</li>
+<li>分代收集</li>
+<li>空间整合</li>
+<li>可预测的停顿</li>
+</ul>
+</li>
+<li>G1</li>
+</ul>
+</li>
+</ul>
+<h3 id="java内存模型">Java内存模型</h3>
+<h5 id="主内存与工作内存">主内存与工作内存</h5>
+<p>Java内存模型规定所有变量都存储在主内存，每条线程有工作线程，工作内存中保存了该线程使用到的变量的主内存副本拷贝，线程对变量的所有操作都必须在工作内存中进行，不能直接读写主内存的变量。不同线程之间也无法直接访问对方工作内存中的变量，线程间变量值的传递需要通过主内存来完成。</p>
+<h5 id="内存间交互">内存间交互</h5>
+<ul>
+<li>lock（锁定）：作用于主内存的变量，标识变量为线程独占状态。</li>
+<li>unlock（解锁）：作用于主内存的变量，释放变量锁定状态。</li>
+<li>read（读取）：作用于主内存的变量，把变量的值从主内存传输到工作线程中，以便随后的load操作使用。</li>
+<li>load（载入）：作用于工作内存的变量，把read操作从主内存得到的变量值放入工作内存的变量副本中。</li>
+<li>use（使用）：作用于工作内存的变量，把工作内存中一个变量的值传递给执行引擎，虚拟机遇到使用该变量值的字节码指令时将会执行这个操作。</li>
+<li>assign（赋值）：作用于工作内存中的变量，把一个从执行引擎接收到的值复制给工作内存的变量，虚拟机遇到给变量赋值的字节码指令时执行这个操作。</li>
+<li>store（存储）：作用于工作内存中的变量，把工作工作内存中一个变量的值传送到主内存中，以便随后的write操作使用。</li>
+<li>write（写入）：作用于主内存中的变量，把store操作从工作内存中得到的变量的值放入主内存的变量中。</li>
+</ul>
+<blockquote>
+<p><em>Java内存模型还规定执行上述8种基本操作的时候必须满足如下规则</em></p>
+<ul>
+<li>不允许read和load、store和write操作之一单独出现，即不允许一个变量从主内存读取了但工作内存不接受，或者从工作内存发起了回写但主内存不接受的情况出现。</li>
+<li>不允许一个线程丢弃最近的assign操作，即变量在工作内存中改变了之后必须把改变同步回主内存。</li>
+<li>不允许一个线程无原因地（没有发生过任何assign操作）把数据从工作内存同步回主内存。</li>
+<li>一个新的变量只能在主内存中“诞生”，不允许在工作内存中直接使用一个未被初始化（load和assign）的变量，换句话说，就是对一个变量实施use、store操作之前，必须先执行了assign和load操作。</li>
+<li>一个变量在同一个时刻只允许一条线程对其进行lock操作，但lock操作可以被同一线程重复执行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁。</li>
+<li>如果对一个变量执行lock操作，会清空工作内存中该变量的值，在执行引擎使用这个变量前，需要重新执行lock或assign操作初始化变量的值。</li>
+<li>如果一个变量事先没有被lock操作锁定，那就不允许对它执行unlock操作，也不允许去unlock一个被其他线程锁定的变量。</li>
+<li>对一个变量执行unlock操作之前，必须先把此变量同步回主内存中（执行store、write操作）。</li>
+</ul>
+</blockquote>
+<h5 id="volatile变量特殊规则">volatile变量特殊规则</h5>
+<p>一个变量定义为volatile之后，具备两种特性：</p>
+<ul>
+<li>保证此变量对所有线程的可见性，这里“可见性”指当一条线程修改了这个变量的值，新值对于其他线程来说是可以立即得知的。</li>
+<li>禁止指令重排序优化。</li>
+</ul>
+<h5 id="原子性可见性与有序性">原子性、可见性与有序性</h5>
+<h5 id="先行发生原则">先行发生原则</h5>
+<h3 id="锁优化">锁优化</h3>
+<h5 id="自旋锁与自适应锁">自旋锁与自适应锁</h5>
+<h5 id="锁消除">锁消除</h5>
+<h5 id="锁粗化">锁粗化</h5>
+<h5 id="轻量级锁">轻量级锁</h5>
+<h5 id="偏向锁">偏向锁</h5>
+<h3 id="jvm调优">JVM调优</h3>
+<h5 id="oom">OOM</h5>
+<h5 id="内存泄露">内存泄露</h5>
+<h5 id="线程死锁">线程死锁</h5>
+<h5 id="锁争用">锁争用</h5>
+<h5 id="cpu占用过高">CPU占用过高</h5>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://example.org/tags/jvm/">JVM</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://example.org/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" data-tooltip="线程池" aria-label="下一篇: 线程池">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://example.org/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/" data-tooltip="Java 内存模型（JMM）" aria-label="上一篇: Java 内存模型（JMM）">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://example.org/2023/07/jvm/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://example.org/2023/07/jvm/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://example.org/2023/07/jvm/" title="分享到 Linkedin" aria-label="分享到 Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#disqus_thread" aria-label="发表评论">
+        <i class="far fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'https:\/\/example.org\/2023\/07\/jvm\/';
+        
+          this.page.identifier = '\/2023\/07\/jvm\/'
+        
+      };
+      (function() {
+        
+        
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+          document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+          return;
+        }
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        var disqus_shortname = 'tranquilpeak';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2023 Fleeting Half Day. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://example.org/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" data-tooltip="线程池" aria-label="下一篇: 线程池">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://example.org/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/" data-tooltip="Java 内存模型（JMM）" aria-label="上一篇: Java 内存模型（JMM）">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://example.org/2023/07/jvm/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://example.org/2023/07/jvm/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://example.org/2023/07/jvm/" title="分享到 Linkedin" aria-label="分享到 Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#disqus_thread" aria-label="发表评论">
+        <i class="far fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fexample.org%2F2023%2F07%2Fjvm%2F" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fexample.org%2F2023%2F07%2Fjvm%2F" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fexample.org%2F2023%2F07%2Fjvm%2F" aria-label="分享到 Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>分享到 Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://example.org/images/avatar.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Fleeting Half Day</h4>
+    
+      <div id="about-card-bio">我随便写写，你随意看看。</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        程序员
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        杭州
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://example.org/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://example.org/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+
