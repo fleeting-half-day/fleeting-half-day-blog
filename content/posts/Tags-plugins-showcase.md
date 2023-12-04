@@ -1,6 +1,7 @@
 ---
 title: "Tags plugins showcase"
 date: 2014-10-29
+draft: true
 tags:
 - tag plugins
 - test
