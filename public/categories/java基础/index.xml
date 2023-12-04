@@ -6,20 +6,20 @@
     <description>Recent content in Java基础 on Fleeting Half Day</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Jul 2023 15:41:32 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 01 Dec 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://fleeting-half-day.github.io/categories/java%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>线程池</title>
-      <link>https://fleeting-half-day.github.io/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
-      <pubDate>Thu, 27 Jul 2023 15:41:32 +0800</pubDate>
-      <guid>https://fleeting-half-day.github.io/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
+      <title>锁优化</title>
+      <link>https://fleeting-half-day.github.io/2023/12/%E9%94%81%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Fri, 01 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://fleeting-half-day.github.io/2023/12/%E9%94%81%E4%BC%98%E5%8C%96/</guid>
       <description></description>
     </item>
     <item>
-      <title>JVM</title>
-      <link>https://fleeting-half-day.github.io/2023/07/jvm/</link>
-      <pubDate>Wed, 19 Jul 2023 13:14:32 +0800</pubDate>
-      <guid>https://fleeting-half-day.github.io/2023/07/jvm/</guid>
+      <title>线程池</title>
+      <link>https://fleeting-half-day.github.io/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
+      <pubDate>Thu, 27 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://fleeting-half-day.github.io/2023/07/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
       <description></description>
     </item>
     <item>
@@ -27,6 +27,13 @@
       <link>https://fleeting-half-day.github.io/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/</link>
       <pubDate>Wed, 19 Jul 2023 00:00:00 +0000</pubDate>
       <guid>https://fleeting-half-day.github.io/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JVM 垃圾回收</title>
+      <link>https://fleeting-half-day.github.io/2023/07/jvm-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</link>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://fleeting-half-day.github.io/2023/07/jvm-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</guid>
       <description></description>
     </item>
   </channel>

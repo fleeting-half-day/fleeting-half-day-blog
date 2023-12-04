@@ -1,6 +1,6 @@
 ---
 title: "线程池"
-date: 2023-07-27T15:41:32+08:00
+date: 2023-07-27
 metaAlignment: center
 categories:
 - Java基础

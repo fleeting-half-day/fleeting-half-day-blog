@@ -1,7 +1,6 @@
 ---
-title: "HTTP/HTTPS原理"
-date: 2023-07-19T16:12:21+08:00
-draft: true
+title: "HTTP / HTTPS 原理"
+date: 2023-07-19
 metaAlignment: center
 categories:
 - 计算机网络
@@ -10,6 +9,7 @@ tags:
 ---
 
 <!--more-->
+
 ## HTTP/HTTPS
 
 HTTPS HTTP + SSL/TLS

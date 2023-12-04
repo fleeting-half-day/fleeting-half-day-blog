@@ -6,15 +6,8 @@
     <description>Recent content in JVM on Fleeting Half Day</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Jul 2023 13:14:32 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jul 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://fleeting-half-day.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>JVM</title>
-      <link>https://fleeting-half-day.github.io/2023/07/jvm/</link>
-      <pubDate>Wed, 19 Jul 2023 13:14:32 +0800</pubDate>
-      <guid>https://fleeting-half-day.github.io/2023/07/jvm/</guid>
-      <description></description>
-    </item>
     <item>
       <title>Java 内存模型（JMM）</title>
       <link>https://fleeting-half-day.github.io/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/</link>
