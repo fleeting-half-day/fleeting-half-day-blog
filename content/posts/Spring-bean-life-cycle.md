@@ -5,7 +5,7 @@ metaAlignment: center
 categories:
 - Spring
 tags:
-- Spring,Bean生命周期
+- Bean生命周期
 ---
 
 <!--more-->

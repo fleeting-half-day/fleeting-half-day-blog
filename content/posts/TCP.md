@@ -6,5 +6,7 @@ metaAlignment: center
 categories:
 - 计算机网络
 tags:
-- 计算机网络,TCP
+- TCP
+- 三次握手
+- 四次挥手
 ---

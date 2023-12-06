@@ -3,9 +3,10 @@ title: "Redis 系列（二）：数据类型及实现原理"
 date: 2023-12-04
 metaAlignment: center
 categories:
-  - Redis 系列
+- Redis 系列
 tags:
-  - Redis
+- Redis
+- 数据类型
 ---
 
 <!--more-->

@@ -3,9 +3,11 @@ title: "锁优化"
 date: 2023-12-01
 metaAlignment: center
 categories:
-  - Java基础
+- Java基础
 tags:
-  - JVM,锁优化,偏向锁,轻量级锁
+- 锁优化
+- 偏向锁
+- 轻量级锁
 ---
 
 <!--more-->

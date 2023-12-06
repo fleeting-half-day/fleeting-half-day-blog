@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Docker 搭建 ELK 8.11.0",
+  
+  "datePublished": "2023-08-27T00:00:00Z",
+  "dateModified": "2023-08-27T00:00:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Fleeting Half Day",
+    
+    "image": "https://fleeting-half-day.github.io/images/avatar.png"
+    
+  },
+  "mainEntityOfPage": { 
+    "@type": "WebPage",
+    "@id": "https:\/\/fleeting-half-day.github.io\/2023\/08\/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0\/" 
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fleeting Half Day",
+    
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://fleeting-half-day.github.io/images/avatar.png"
+    }
+    
+  },
+  "description": "",
+  "keywords": []
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.120.4 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="Fleeting Half Day">
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 搭建 ELK 8.11.0">
+<meta name="twitter:title" content="Docker 搭建 ELK 8.11.0">
+<meta property="og:url" content="https://fleeting-half-day.github.io/2023/08/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0/">
+<meta property="twitter:url" content="https://fleeting-half-day.github.io/2023/08/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0/">
+<meta property="og:site_name" content="Fleeting Half Day">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2023-08-27T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2023-08-27T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="Java基础">
+    
+  
+  
+    
+      <meta property="article:tag" content="ELK">
+    
+      <meta property="article:tag" content="ES">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://fleeting-half-day.github.io/images/avatar.png">
+  <meta property="twitter:image" content="https://fleeting-half-day.github.io/images/avatar.png">
+
+
+
+
+
+
+    <title>Docker 搭建 ELK 8.11.0</title>
+
+    <link rel="icon" href="https://fleeting-half-day.github.io/images/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://fleeting-half-day.github.io/2023/08/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://fleeting-half-day.github.io/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://fleeting-half-day.github.io/" aria-label="去首页">Fleeting Half Day</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://fleeting-half-day.github.io/#about" aria-label="打开链接: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://fleeting-half-day.github.io/images/avatar.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://fleeting-half-day.github.io/#about" aria-label="阅读有关作者的更多信息">
+          <img class="sidebar-profile-picture" src="https://fleeting-half-day.github.io/images/avatar.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Fleeting Half Day</h4>
+        
+          <h5 class="sidebar-profile-bio">我随便写写，你随意看看。</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://fleeting-half-day.github.io/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://fleeting-half-day.github.io/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://fleeting-half-day.github.io/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://fleeting-half-day.github.io/archives" title="Archives">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://fleeting-half-day.github.io/#about" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/fleeting-half-day" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://fleeting-half-day.github.io/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title">
+      Docker 搭建 ELK 8.11.0
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2023-08-27T00:00:00Z">
+        
+  八月 27, 2023
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://fleeting-half-day.github.io/categories/java%e5%9f%ba%e7%a1%80">Java基础</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <h4 id="一创建网络">一、创建网络</h4>
+<pre tabindex="0"><code>docker network create elastic
+</code></pre><h4 id="二安装-elasticsearch">二、安装 Elasticsearch</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 拉取镜像</span>
+</span></span><span style="display:flex;"><span>docker pull elasticsearch:8.11.0
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 运行镜像</span>
+</span></span><span style="display:flex;"><span>docker run -itd --name es --net elastic -p 9200:9200 -p 9300:9300 -m 1GB elasticsearch:8.11.0
+</span></span></code></pre></div><h4 id="三安装-kibana">三、安装 Kibana</h4>
+<ul>
+<li>运行 Kibana</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 拉取镜像</span>
+</span></span><span style="display:flex;"><span>docker pull kibana:8.11.0
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 运行镜像</span>
+</span></span><span style="display:flex;"><span>docker run -itd --name kibana --net elastic -p 5601:5601 kibana:8.11.0
+</span></span></code></pre></div><ul>
+<li>配置 Kibana</li>
+</ul>
+<p>浏览器访问：<a href="http://127.0.0.1:5601">http://127.0.0.1:5601</a>
+第一次访问需要配置访问令牌，和验证码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 随机生成 elastic 密码</span>
+</span></span><span style="display:flex;"><span>docker exec -it es /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 也可以进入 es 服务设置自定义密码</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 交互式运行 es</span>
+</span></span><span style="display:flex;"><span>docker exec -it es /bin/bash
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置 elastic 用户密码</span>
+</span></span><span style="display:flex;"><span>&gt;bin/elasticsearch-reset-password --username elastic -i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注册 Kibana 令牌</span>
+</span></span><span style="display:flex;"><span>docker exec -it es /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 生成验证码</span>
+</span></span><span style="display:flex;"><span>docker exec -it kibana bin/kibana-verification-code
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 也可以在 es 启动日志中查看 elastic 密码、Kibana 令牌、HTTP CA 证书 SHA-256 指纹：</span>
+</span></span><span style="display:flex;"><span>docker logs -f es
+</span></span></code></pre></div><p><img src="https://fleeting-half-day.github.io/images/other/es_log.png" alt="es log"></p>
+<h4 id="四安装-logstash">四、安装 Logstash</h4>
+<ul>
+<li>配置 Logstash 环境</li>
+</ul>
+<p>创建 config、pipeline 目录，把 es 生成的 http 证书拷贝到 config 文件夹。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 把 es 集群生成的 HTTP CA 证书拷贝到 config 文件夹</span>
+</span></span><span style="display:flex;"><span>cd config
+</span></span><span style="display:flex;"><span>docker cp es:/usr/share/elasticsearch/config/certs .
+</span></span></code></pre></div><p>在 config 目录下创建 logstash.yml、pipeline.yml 配置文件，logstash.yml配置如下：</p>
+<pre tabindex="0"><code>http.host: &#34;0.0.0.0&#34;
+# 配置xpack monitoring
+# 开启监控
+xpack.monitoring.enabled: true
+# 配置es集群 注意更换成自己的虚拟机的ip
+xpack.monitoring.elasticsearch.hosts: [&#34;https://127.0.0.1:9200&#34;]
+# 用户名和密码  自行在kibana上更改密码
+xpack.monitoring.elasticsearch.username: logstash_system
+xpack.monitoring.elasticsearch.password: lroot123
+# https通信使用的证书，该证书拷贝自es集群
+xpack.monitoring.elasticsearch.ssl.certificate_authority: &#34;/usr/share/logstash/config/certs/http_ca.crt&#34;
+# http ca的指纹，es   更换成自己的http ca指纹
+xpack.monitoring.elasticsearch.ssl.ca_trusted_fingerprint: 0209798656a65d579d816d6f537e6a157ee5b8c0544aa731f9ba85e7ff878cf0
+pipeline.id: main
+</code></pre><p>pipeline.yml 配置：</p>
+<pre tabindex="0"><code>- pipeline.id: main
+  path.config: &#34;/usr/share/logstash/pipeline&#34;
+</code></pre><ul>
+<li>配置管道</li>
+</ul>
+<p>在 pipeline 目录下创建 *.conf 文件，配置 input、filter、output</p>
+<blockquote>
+<p>详细配置参考官网：</p>
+<ul>
+<li><a href="https://www.elastic.co/guide/en/logstash/8.11/input-plugins.html">input plugins</a></li>
+<li><a href="https://www.elastic.co/guide/en/logstash/8.11/filter-plugins.html">Filter plugins</a></li>
+<li><a href="https://www.elastic.co/guide/en/logstash/8.11/output-plugins.html">Output plugins</a></li>
+</ul>
+</blockquote>
+<p>示例如下：</p>
+<pre tabindex="0"><code># 控制台标准输入输出
+input {
+    stdin { }
+}
+output {
+    stdout { }
+}
+</code></pre><ul>
+<li>运行 logstash</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 拉取镜像</span>
+</span></span><span style="display:flex;"><span>docker pull logstash:8.11.0
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 运行 logstash，rm 参数作用：运行结束删除容器</span>
+</span></span><span style="display:flex;"><span>docker run --rm -it --net elastic -v ~/docker/logstash/config/:/usr/share/logstash/config/ -v ~/docker/logstash/pipeline/:/usr/share/logstash/pipeline/ logstash:8.11.0
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或</span>
+</span></span><span style="display:flex;"><span>docker run -itd --name logstash --net elastic -v ~/docker/logstash/config/:/usr/share/logstash/config/ -v ~/docker/logstash/pipeline/:/usr/share/logstash/pipeline/ logstash:8.11.0
+</span></span></code></pre></div><blockquote>
+<p>官网文档:
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.11/docker.html">Elasticsearch、Kibana</a>
+<a href="https://www.elastic.co/guide/en/logstash/current/docker.html">Logstash</a></p>
+</blockquote>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://fleeting-half-day.github.io/tags/elk/">ELK</a>
+
+  <a class="tag tag--primary tag--small" href="https://fleeting-half-day.github.io/tags/es/">ES</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2023/10/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" data-tooltip="线程池" aria-label="下一篇: 线程池">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2023/07/redis-%E7%B3%BB%E5%88%97%E4%B8%80%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-tooltip="Redis 系列（一）：底层数据结构" aria-label="上一篇: Redis 系列（一）：底层数据结构">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://fleeting-half-day.github.io/2023/08/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://fleeting-half-day.github.io/2023/08/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://fleeting-half-day.github.io/2023/08/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0/" title="分享到 Linkedin" aria-label="分享到 Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#disqus_thread" aria-label="发表评论">
+        <i class="far fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'https:\/\/fleeting-half-day.github.io\/2023\/08\/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0\/';
+        
+          this.page.identifier = '\/2023\/08\/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0\/'
+        
+      };
+      (function() {
+        
+        
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+          document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+          return;
+        }
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        var disqus_shortname = 'tranquilpeak';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2023 Fleeting Half Day. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2023/10/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" data-tooltip="线程池" aria-label="下一篇: 线程池">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2023/07/redis-%E7%B3%BB%E5%88%97%E4%B8%80%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-tooltip="Redis 系列（一）：底层数据结构" aria-label="上一篇: Redis 系列（一）：底层数据结构">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="分享这个帖子">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://fleeting-half-day.github.io/2023/08/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0/" title="分享到 Facebook" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://fleeting-half-day.github.io/2023/08/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0/" title="分享到 Twitter" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://fleeting-half-day.github.io/2023/08/docker-%E6%90%AD%E5%BB%BA-elk-8.11.0/" title="分享到 Linkedin" aria-label="分享到 Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#disqus_thread" aria-label="发表评论">
+        <i class="far fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="回到顶部">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffleeting-half-day.github.io%2F2023%2F08%2Fdocker-%25E6%2590%25AD%25E5%25BB%25BA-elk-8.11.0%2F" aria-label="分享到 Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Ffleeting-half-day.github.io%2F2023%2F08%2Fdocker-%25E6%2590%25AD%25E5%25BB%25BA-elk-8.11.0%2F" aria-label="分享到 Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ffleeting-half-day.github.io%2F2023%2F08%2Fdocker-%25E6%2590%25AD%25E5%25BB%25BA-elk-8.11.0%2F" aria-label="分享到 Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>分享到 Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://fleeting-half-day.github.io/images/avatar.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Fleeting Half Day</h4>
+    
+      <div id="about-card-bio">我随便写写，你随意看看。</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        程序员
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        杭州
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://fleeting-half-day.github.io/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://fleeting-half-day.github.io/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+

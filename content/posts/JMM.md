@@ -5,7 +5,8 @@ metaAlignment: center
 categories:
 - Java基础
 tags:
-- JVM
+- JMM
+- 内存模型
 ---
 
 <!--more-->
