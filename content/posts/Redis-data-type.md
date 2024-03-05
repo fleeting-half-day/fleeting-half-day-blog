@@ -1,5 +1,5 @@
 ---
-title: "Redis 系列（二）：数据类型及实现原理"
+title: "Redis 系列（二）：数据类型实现"
 date: 2023-12-04
 metaAlignment: center
 categories:
@@ -11,7 +11,7 @@ tags:
 
 <!--more-->
 
-## Redis 数据类型及实现原理
+## Redis 数据类型实现
 
 ### 对象的类型与编码
 > Redis 使用五种数据类型来表示键和值，Redis 每创建一个键值对，至少会创建两个对象，一个键对象，一个值对象，而 Redis 中每个对象都是由 redisObject 来表示的：
