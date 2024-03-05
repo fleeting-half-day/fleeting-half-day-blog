@@ -13,9 +13,13 @@ tags:
 
 ## Redis 内存淘汰策略
 
-学过 Java 的应该知道，引用计数的内存回收机制没有被 Java 采用，因为引用计数算法不能解决循环引用的问题，而导致内存泄露。那么 Redis 既然采用引用计数算法，如果解决这个问题呢？
+### 设置Redis最大内存
+在配置文件 redis.conf 中，可以通过参数 maxmemory 来设置最大内存，不设置该参数默认是无限制的，通常设置为物理内存的四分之三。
 
-Redis 的配置文件 redis.conf 中，在 MEMORY MANAGEMENT 下配置 maxmemory-policy 配置，当内存使用达到最大值时，Redis 使用的清除策略。有以下几种：
+
+### 设置内存淘汰策略
+在配置文件 redis.conf 中，可以通过 MEMORY MANAGEMENT 下的参数 maxmemory-policy 设置合适的淘汰策略。
+当内存使用达到最大值时，会触发 redis 的淘汰策略，**Redis 内存淘汰策略** 有以下几种：
 
 * volatile-lru：根据 LRU 算法删除设置了过期时间的 key；
 * allkeys-lru：根据 LRU 算法删除任意 key；

@@ -202,20 +202,7 @@ resetRefCount | 将对象的引用计数值设置为 0，但不释放对象，�
 
 学过 Java 的应该知道，引用计数的内存回收机制没有被 Java 采用，因为引用计数算法不能解决循环引用的问题，而导致内存泄露。那么 Redis 既然采用引用计数算法，如果解决这个问题呢？
 
-Redis 的配置文件 redis.conf 中，在 MEMORY MANAGEMENT 下配置 maxmemory-policy 配置，当内存使用达到最大值时，Redis 使用的清除策略。有以下几种：
-
-* volatile-lru：根据 LRU 算法删除设置了过期时间的 key；
-* allkeys-lru：根据 LRU 算法删除任意 key；
-* volatile-lfu：根据 LFU 算法删除设置了过期时间的 key，Redis5.0 版本之后新增；
-* allkeys-lfu：根据 LFU 算法删除任意 key，Redis5.0 版本之后新增；
-* volatile-random：随机删除设置了过期时间的 key；
-* allkeys-random：随机删除任意 key；
-* volatile-ttl：删除过期时间最近的 key（minor TTL）；
-* no-eviction：默认选项，不删除任何 key，写操作时返回错误；
-
-LRU（Least Recently Used）：最近最少使用
-
-LFU（Least Frequently Used）：最不常用
+在 Redis 的配置文件 redis.conf 中，可以通过参数 maxmemory-policy 设置合适的 [内存淘汰策略](https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E5%9B%9B%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5/)，当内存使用达到最大值时（设置最大内存参数：maxmemory），Redis 会根据设置的淘汰策略删除缓存。
 
 ##### 内存共享
 refcount 属性除了实现内存回收以外，还能用于内存共享。比如通过命令 set k1 100，创建一个键为 k1，值为 100 的字符串对象，接着通过命令 set k2 100，创建一个键为 k2，值为 100 的字符串对象，那么 Redis 时如何做的呢？
