@@ -7,10 +7,10 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "分布式事务",
+  "headline": "Redis 系列（三）：过期删除策略",
   
-  "datePublished": "2023-07-19T00:00:00Z",
-  "dateModified": "2023-07-19T00:00:00Z",
+  "datePublished": "2024-03-04T00:00:00Z",
+  "dateModified": "2024-03-04T00:00:00Z",
   "author": {
     "@type": "Person",
     "name": "Fleeting Half Day",
@@ -20,7 +20,7 @@
   },
   "mainEntityOfPage": { 
     "@type": "WebPage",
-    "@id": "https:\/\/fleeting-half-day.github.io\/2023\/07\/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1\/" 
+    "@id": "https:\/\/fleeting-half-day.github.io\/2024\/03\/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5\/" 
   },
   "publisher": {
     "@type": "Organization",
@@ -32,7 +32,7 @@
     }
     
   },
-  "description": "事务可以保证业务的一致性，分布式事务就是保证分布式系统中多个服务之间的业务一致性。\n",
+  "description": "",
   "keywords": []
 }
 
@@ -43,35 +43,37 @@
 <meta name="generator" content="Hugo 0.120.4 with theme Tranquilpeak 0.5.3-BETA">
 <meta name="author" content="Fleeting Half Day">
 <meta name="keywords" content="">
-<meta name="description" content="事务可以保证业务的一致性，分布式事务就是保证分布式系统中多个服务之间的业务一致性。">
+<meta name="description" content="">
 
 
-<meta property="og:description" content="事务可以保证业务的一致性，分布式事务就是保证分布式系统中多个服务之间的业务一致性。">
+<meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分布式事务">
-<meta name="twitter:title" content="分布式事务">
-<meta property="og:url" content="https://fleeting-half-day.github.io/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
-<meta property="twitter:url" content="https://fleeting-half-day.github.io/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+<meta property="og:title" content="Redis 系列（三）：过期删除策略">
+<meta name="twitter:title" content="Redis 系列（三）：过期删除策略">
+<meta property="og:url" content="https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/">
+<meta property="twitter:url" content="https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/">
 <meta property="og:site_name" content="Fleeting Half Day">
-<meta property="og:description" content="事务可以保证业务的一致性，分布式事务就是保证分布式系统中多个服务之间的业务一致性。">
-<meta name="twitter:description" content="事务可以保证业务的一致性，分布式事务就是保证分布式系统中多个服务之间的业务一致性。">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
 <meta property="og:locale" content="zh-cn">
 
   
-    <meta property="article:published_time" content="2023-07-19T00:00:00">
+    <meta property="article:published_time" content="2024-03-04T00:00:00">
   
   
-    <meta property="article:modified_time" content="2023-07-19T00:00:00">
+    <meta property="article:modified_time" content="2024-03-04T00:00:00">
   
-  
-  
-    
-      <meta property="article:section" content="分布式">
-    
   
   
     
-      <meta property="article:tag" content="分布式">
+      <meta property="article:section" content="Redis 系列">
+    
+  
+  
+    
+      <meta property="article:tag" content="Redis">
+    
+      <meta property="article:tag" content="过期删除策略">
     
   
 
@@ -92,14 +94,14 @@
 
 
 
-    <title>分布式事务</title>
+    <title>Redis 系列（三）：过期删除策略</title>
 
     <link rel="icon" href="https://fleeting-half-day.github.io/images/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://fleeting-half-day.github.io/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+    <link rel="canonical" href="https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -249,15 +251,15 @@
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title">
-      分布式事务
+      Redis 系列（三）：过期删除策略
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time datetime="2023-07-19T00:00:00Z">
+      <time datetime="2024-03-04T00:00:00Z">
         
-  七月 19, 2023
+  三月 4, 2024
 
       </time>
     
@@ -266,7 +268,7 @@
   
     <span>发布在</span>
     
-      <a class="category-link" href="https://fleeting-half-day.github.io/categories/%e5%88%86%e5%b8%83%e5%bc%8f">分布式</a>
+      <a class="category-link" href="https://fleeting-half-day.github.io/categories/redis-%e7%b3%bb%e5%88%97">Redis 系列</a>
     
   
 
@@ -276,45 +278,50 @@
           
           <div class="post-content markdown">
             <div class="main-content-wrap">
-              <p>事务可以保证业务的一致性，分布式事务就是保证分布式系统中多个服务之间的业务一致性。</p>
-<p>2PC、3PC、TCC、本地消息表、消息事务</p>
-<h3 id="2pc二阶段提交">2PC（二阶段提交）</h3>
-<p><strong>2PC</strong> 由一个全局的 <strong>事务协调者</strong> 协调各个子事务的 <strong>参与者</strong>（本地资源）完成两阶段提交。</p>
-<p>第一阶段是【准备（投票）阶段】</p>
+              <h2 id="redis-过期删除策略">Redis 过期删除策略</h2>
+<h3 id="过期删除策略">过期删除策略</h3>
+<p>通常删除某个key，有如下三种方式：</p>
+<h5 id="定时删除">定时删除</h5>
+<p>在设置某个key 的过期时间同时，我们创建一个定时器，让定时器在该过期时间到来时，立即执行对其进行删除的操作。</p>
 <ul>
-<li><strong>协调者</strong> 首先发一个prepare命令 给所有 <strong>参与者</strong>。</li>
-<li><strong>参与者</strong> 收到消息后，根据自己实际情况，判断是否可以提交，并将结果返回给 <strong>协调者</strong>。</li>
-<li>同步等待所有 <strong>参与者</strong> 的响应之后进入第二阶段。</li>
+<li>优点：定时删除对内存是最友好的，能够保存内存的key一旦过期就能立即从内存中删除。</li>
+<li>缺点：对CPU最不友好，在过期键比较多的时候，删除过期键会占用一部分 CPU 时间，对服务器的响应时间和吞吐量造成影响。</li>
 </ul>
-<p>第二阶段是【提交阶段】</p>
+<h5 id="惰性删除">惰性删除</h5>
+<p>设置该key 过期时间后，我们不去管它，当需要该key时，我们在检查其是否过期，如果过期，我们就删掉它，反之返回该key。</p>
 <ul>
-<li><strong>协调者</strong> 收到所有 <strong>参与者</strong> 的确认消息后，判断是否都可以提交。</li>
-<li>如果在第一阶段所有 <strong>参与者</strong> 都返回成功，协调者则向所有 <strong>参与者</strong> 发送提交事务命令，然后等待所有事务都提交成功之后，返回事务执行成功。</li>
-<li>如果在第一阶段有某个 <strong>参与者</strong> 返回失败，那么 <strong>协调者</strong> 就会向所有 <strong>参与者</strong> 发送回滚事务的请求，即分布式事务执行失败。</li>
+<li>优点：对 CPU友好，我们只会在使用该键时才会进行过期检查，对于很多用不到的key不用浪费时间进行过期检查。</li>
+<li>缺点：对内存不友好，如果一个键已经过期，但是一直没有使用，那么该键就会一直存在内存中，如果数据库中有很多这种使用不到的过期键，这些键便永远不会被删除，内存永远不会释放。从而造成内存泄漏。</li>
 </ul>
-<p><strong>2PC</strong> 存在很多缺点：</p>
-<p>1、<strong>协调者</strong> 挂掉了怎么办？整个分布式就没办法继续执行，
-2、假设某个 <strong>参与者</strong> 的提交消息因为网络中断了，请求没有到达，这个也没有发送异常消息回来，那么事务就执行失败了。</p>
-<h3 id="3pc三阶段提交">3PC（三阶段提交）</h3>
-<p>针对 <strong>2PC</strong> 的缺点，提出了 <strong>3PC</strong>，它在 <strong>协调者</strong> 和 <strong>参与者</strong> 中都引入了超时机制，并且在准备阶段之前增加了 <strong>询问阶段</strong>，然后再锁资源，最后真正提交。</p>
+<h5 id="定期删除">定期删除</h5>
+<p>每隔一段时间，我们就对一些key进行检查，删除里面过期的key。</p>
 <ul>
-<li><strong>询问阶段</strong> <strong>协调者</strong> 向 <strong>参与者</strong> 发送 <strong>cancCommit</strong> 请求，<strong>参与者</strong> 只需根据实际情况返回 Yes 或 No。</li>
-<li><strong>预提交阶段</strong> 如果所以 <strong>参与者</strong> 都返回 Yes，<strong>协调者</strong> 发送 <strong>preCommit</strong> 请求，<strong>参与者</strong> 执行事务操作（并未提交事务），并将信息记录到事务日志中。</li>
-<li><strong>提交阶段</strong> 如果所以 <strong>参与者</strong> 预提交成功，<strong>协调者</strong> 发送请求，<strong>参与者</strong> 执行 <strong>commit</strong>；如果有 <strong>参与者</strong> 预提交失败，<strong>协调者</strong> 发送请求，<strong>参与者</strong> 执行 <strong>rollback</strong>。</li>
-</ul>
-<p>引入了超时机制，如果是 等待预提交命令 超时可以什么都不用做，如果是 等待提交命令超时，默认执行事务提交，但可能是事务回滚操作，就会出现数据不一致。</p>
-<h3 id="tcctry-confirm-cancel">TCC（Try-Confirm-Cancel）</h3>
-<p><strong>TCC</strong> 模式可以解决 <strong>2PC</strong> 中资源锁定和阻塞问题，减少资源锁定问题。</p>
+<li>优点：可以通过限制删除操作执行的时长和频率来减少删除操作对 CPU 的影响。另外定期删除，也能有效释放过期键占用的内存。</li>
+<li>缺点：
 <ul>
-<li><strong>Try</strong> 阶段做业务检查（一致性）及资源预留（隔离），此阶段是一个初步阶段，要和第二阶段的 <strong>Confirm</strong> 一起才能组成一个完整事务；</li>
-<li><strong>Confirm</strong> 阶段是确认提交，<strong>Try</strong> 阶段所有分支事务执行成功则执行提交。通常情况认为 <strong>Confirm</strong> 不会失败，即 <strong>Try</strong> 成功，<strong>Confirm</strong> 一定成功，<strong>若真的失败了，就需要引入重试机制或人工处理</strong>。</li>
-<li><strong>Cancel</strong> 阶段是业务执行失败需要回滚的状态下执行分支事务的业务取消和预留资源释放。通常情况认为 Cancel 也不会失败，<strong>若失败了，也需要引入重试机制或人工处理</strong>。</li>
+<li>难以确定删除操作执行的时长和频率。</li>
+<li>如果执行的太频繁，定期删除策略变得和定时删除策略一样，对CPU不友好。</li>
+<li>如果执行的太少，那又和惰性删除一样了，过期键占用的内存不会及时得到释放。</li>
+<li>另外最重要的是，在获取某个键时，如果某个键的过期时间已经到了，但是还没执行定期删除，那么就会返回这个键的值，这是业务不能忍受的错误。</li>
 </ul>
-<p><strong>Confirm、Cancel 阶段需要重试就需要保证 Confirm 和 Cancel 的幂等性</strong>。</p>
-<h3 id="本地消息表">本地消息表</h3>
-<h3 id="最大努力通知">最大努力通知</h3>
-<h3 id="可靠消息通知">可靠消息通知</h3>
-<h3 id="seta">Seta</h3>
+</li>
+</ul>
+<h3 id="redis过期删除策略">Redis过期删除策略</h3>
+<p>前面讨论了删除过期键的三种策略，发现单一使用某一策略都不能满足实际需求，既然单一策略不能满足，那就组合来使用吧。
+没错，Redis的过期删除策略就是：<strong>惰性删除</strong> 和 <strong>定期删除</strong> 两种策略配合使用。</p>
+<ul>
+<li>
+<p><strong>惰性删除</strong>：Redis的惰性删除策略由 db.c/expireIfNeeded 函数实现，所有键读写命令执行之前都会调用 expireIfNeeded 函数对其进行检查，如果过期，则删除该键，然后执行键不存在的操作；未过期则不作操作，继续执行原有的命令。</p>
+</li>
+<li>
+<p><strong>定期删除</strong>：由redis.c/activeExpireCycle 函数实现，函数以一定的频率运行，每次运行时，都从一定数量的数据库中取出一定数量的随机键进行检查，并删除其中的过期键。</p>
+</li>
+</ul>
+<p><em>注意：并不是一次运行就检查所有的库，所有的键，而是随机检查一定数量的键。</em></p>
+<p>定期删除函数的运行频率，在Redis2.6版本中，规定每秒运行10次，大概100ms运行一次。在Redis2.8版本后，可以通过修改配置文件redis.conf 的 hz 选项来调整这个次数。</p>
+<p>建议不要将这个值设置超过 100，否则会对CPU造成比较大的压力。</p>
+<p>通过过期删除策略，对于某些永远使用不到的键，并且多次定期删除也没选定到并删除，那么这些键同样会一直驻留在内存中，又或者在Redis中存入了大量的键，这些操作可能会导致Redis内存不够用，这时候就需要 <a href="http://localhost:1313/2024/03/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/">Redis内存淘汰策略</a> 了。</p>
+<p>参考：<a href="https://www.cnblogs.com/ysocean/tag/Redis%E8%AF%A6%E8%A7%A3/">Redis详解</a></p>
               
 
 
@@ -328,7 +335,9 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://fleeting-half-day.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+  <a class="tag tag--primary tag--small" href="https://fleeting-half-day.github.io/tags/redis/">Redis</a>
+
+  <a class="tag tag--primary tag--small" href="https://fleeting-half-day.github.io/tags/%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/">过期删除策略</a>
 
                   </div>
                 
@@ -341,7 +350,7 @@
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/" data-tooltip="Java 内存模型（JMM）" aria-label="下一篇: Java 内存模型（JMM）">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E5%9B%9B%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5/" data-tooltip="Redis 系列（四）：内存淘汰策略" aria-label="下一篇: Redis 系列（四）：内存淘汰策略">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -349,7 +358,7 @@
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2023/07/jvm-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" data-tooltip="JVM 垃圾回收" aria-label="上一篇: JVM 垃圾回收">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2023/12/redis-%E7%B3%BB%E5%88%97%E4%BA%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AE%9E%E7%8E%B0/" data-tooltip="Redis 系列（二）：数据类型实现" aria-label="上一篇: Redis 系列（二）：数据类型实现">
           
               <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
               <i class="fa fa-angle-right"></i>
@@ -367,19 +376,19 @@
     </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://fleeting-half-day.github.io/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" title="分享到 Facebook" aria-label="分享到 Facebook">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/" title="分享到 Facebook" aria-label="分享到 Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://fleeting-half-day.github.io/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" title="分享到 Twitter" aria-label="分享到 Twitter">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/" title="分享到 Twitter" aria-label="分享到 Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://fleeting-half-day.github.io/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" title="分享到 Linkedin" aria-label="分享到 Linkedin">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/" title="分享到 Linkedin" aria-label="分享到 Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
@@ -410,9 +419,9 @@
     </div>
     <script type="text/javascript">
       var disqus_config = function() {
-        this.page.url = 'https:\/\/fleeting-half-day.github.io\/2023\/07\/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1\/';
+        this.page.url = 'https:\/\/fleeting-half-day.github.io\/2024\/03\/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5\/';
         
-          this.page.identifier = '\/2023\/07\/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1\/'
+          this.page.identifier = '\/2024\/03\/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5\/'
         
       };
       (function() {
@@ -448,7 +457,7 @@
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2023/07/java-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8Bjmm/" data-tooltip="Java 内存模型（JMM）" aria-label="下一篇: Java 内存模型（JMM）">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E5%9B%9B%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5/" data-tooltip="Redis 系列（四）：内存淘汰策略" aria-label="下一篇: Redis 系列（四）：内存淘汰策略">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -456,7 +465,7 @@
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2023/07/jvm-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" data-tooltip="JVM 垃圾回收" aria-label="上一篇: JVM 垃圾回收">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://fleeting-half-day.github.io/2023/12/redis-%E7%B3%BB%E5%88%97%E4%BA%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AE%9E%E7%8E%B0/" data-tooltip="Redis 系列（二）：数据类型实现" aria-label="上一篇: Redis 系列（二）：数据类型实现">
           
               <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
               <i class="fa fa-angle-right"></i>
@@ -474,19 +483,19 @@
     </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://fleeting-half-day.github.io/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" title="分享到 Facebook" aria-label="分享到 Facebook">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/" title="分享到 Facebook" aria-label="分享到 Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://fleeting-half-day.github.io/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" title="分享到 Twitter" aria-label="分享到 Twitter">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/" title="分享到 Twitter" aria-label="分享到 Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://fleeting-half-day.github.io/2023/07/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" title="分享到 Linkedin" aria-label="分享到 Linkedin">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://fleeting-half-day.github.io/2024/03/redis-%E7%B3%BB%E5%88%97%E4%B8%89%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/" title="分享到 Linkedin" aria-label="分享到 Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
@@ -517,19 +526,19 @@
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffleeting-half-day.github.io%2F2023%2F07%2F%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2F" aria-label="分享到 Facebook">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffleeting-half-day.github.io%2F2024%2F03%2Fredis-%25E7%25B3%25BB%25E5%2588%2597%25E4%25B8%2589%25E8%25BF%2587%25E6%259C%259F%25E5%2588%25A0%25E9%2599%25A4%25E7%25AD%2596%25E7%2595%25A5%2F" aria-label="分享到 Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i><span>分享到 Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Ffleeting-half-day.github.io%2F2023%2F07%2F%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2F" aria-label="分享到 Twitter">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Ffleeting-half-day.github.io%2F2024%2F03%2Fredis-%25E7%25B3%25BB%25E5%2588%2597%25E4%25B8%2589%25E8%25BF%2587%25E6%259C%259F%25E5%2588%25A0%25E9%2599%25A4%25E7%25AD%2596%25E7%2595%25A5%2F" aria-label="分享到 Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ffleeting-half-day.github.io%2F2023%2F07%2F%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2F" aria-label="分享到 Linkedin">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ffleeting-half-day.github.io%2F2024%2F03%2Fredis-%25E7%25B3%25BB%25E5%2588%2597%25E4%25B8%2589%25E8%25BF%2587%25E6%259C%259F%25E5%2588%25A0%25E9%2599%25A4%25E7%25AD%2596%25E7%2595%25A5%2F" aria-label="分享到 Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i><span>分享到 Linkedin</span>
         </a>
       </li>

@@ -1,6 +1,6 @@
 ---
 title: "Redis 系列（三）：过期删除策略"
-date: 2024-03-05
+date: 2024-03-04
 metaAlignment: center
 categories:
 - Redis 系列
