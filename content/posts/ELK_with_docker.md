@@ -3,7 +3,7 @@ title: "Docker 搭建 ELK 8.11.0"
 date: 2023-08-27
 metaAlignment: center
 categories:
-- Java基础
+- docker
 tags:
 - ELK
 - ES
